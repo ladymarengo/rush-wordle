@@ -5,14 +5,24 @@ fn main() {
 	let five_letter_dict = create_dict();
 	println!("{}", five_letter_dict.len());
 	for i in 0..50 {
-		println!("{}", five_letter_dict[i * 500]);
+		println!("{}", five_letter_dict[i]);
 	}
 }
 
+// fn create_dict() -> Vec<String> {
+// 	let dict: Vec<String> = read_to_string("assets/en_dict.txt").unwrap()
+// 	.split("\n")
+// 	.map(|s| s.to_string())
+// 	.filter(|s| s.len() == 5).collect();
+// 	return dict;
+// }
+
 fn create_dict() -> Vec<String> {
-	let dict: Vec<String> = read_to_string("assets/en_dict.txt").unwrap()
+	let dict: Vec<String> = read_to_string("assets/frequency.txt").unwrap()
 	.split("\n")
 	.map(|s| s.to_string())
-	.filter(|s| s.len() == 5).collect();
+	.filter(|s| {
+		let n: Vec<String> = s.split("\t").map(|s| s.to_string()).collect();
+		return n[0].len() == 5}).collect();
 	return dict;
 }
