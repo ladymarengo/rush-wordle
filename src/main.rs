@@ -33,6 +33,8 @@ fn main() {
     }
 }
 
+// Ask the user to choose the basic functionality - assistant or player.
+
 fn get_start_input() -> Functionality {
     let functionality: Functionality;
     let mut user_input = String::new();
@@ -55,6 +57,8 @@ fn get_start_input() -> Functionality {
     }
     return functionality;
 }
+
+// Ask the user to provide the input for the Solver from the Wordle output.
 
 fn get_input(i: usize) -> String {
     let mut user_input = String::new();
@@ -90,6 +94,8 @@ fn get_input(i: usize) -> String {
     return user_input;
 }
 
+// Check if the input is in the specified format.
+
 fn correct_input(user_input: &str) -> bool {
     user_input.len() == 11
         && user_input[0..5].chars().all(char::is_alphabetic)
@@ -97,9 +103,13 @@ fn correct_input(user_input: &str) -> bool {
         && user_input.chars().collect::<Vec<char>>()[10] == '\n'
 }
 
+// Check if the digits in the input are valid.
+
 fn num_is_correct(c: char) -> bool {
     c == '0' || c == '1' || c == '2'
 }
+
+// Print the list of all the valid words in a file and a small sample in the terminal.
 
 fn print_list(list: &Vec<String>) {
     let path = Path::new("guesses/guesses.txt");
@@ -128,6 +138,8 @@ fn print_list(list: &Vec<String>) {
         }
     }
 }
+
+// Filter valid words based on input.
 
 fn sort_dict(user_input: Vec<char>, mut words: Vec<String>) -> Vec<String> {
     let mut green_dict: HashMap<usize, char> = HashMap::new();
@@ -186,6 +198,8 @@ fn sort_dict(user_input: Vec<char>, mut words: Vec<String>) -> Vec<String> {
     return words;
 }
 
+// Choose the word that will filter out a greatest number of guesses.
+
 fn choose_word(list: &Vec<String>) {
     let alphabet = String::from("abcdefghijklmnopqrstuvwxyz");
     let mut letter_frequency: HashMap<char, usize> = HashMap::new();
@@ -217,6 +231,8 @@ fn choose_word(list: &Vec<String>) {
         color::Fg(color::Reset)
     );
 }
+
+// Filter all 5-letter words from the chosen dictionary.
 
 fn create_dict() -> Vec<String> {
     let dict: Vec<String> = read_to_string("assets/wordle_dict.txt")
