@@ -157,14 +157,7 @@ fn sort_dict(user_input: Vec<char>, mut words: Vec<String>) -> Vec<String> {
     for (index, letter) in &green_dict {
         words = words
             .into_iter()
-            .filter(|s| {
-                let temp = s.chars().position(|c| c == *letter);
-                if let Some(i) = temp {
-                    return i == *index;
-                } else {
-                    return false;
-                }
-            })
+            .filter(|s| s.chars().collect::<Vec<char>>()[*index] == *letter)
             .collect();
     }
     for (index, letter) in &yellow_dict {
